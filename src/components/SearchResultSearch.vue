@@ -14,9 +14,9 @@ const emits = defineEmits<{
 const searchText = ref('')
 const { results } = useFuse(searchText, props.gomiFees, {
   fuseOptions: {
-    keys: ['name', 'furigana']
+    keys: ['name', 'furigana'],
   },
-  matchAllWhenSearchEmpty: true
+  matchAllWhenSearchEmpty: false,
 })
 
 const onInputSearchText = (e: any) => {
@@ -38,7 +38,7 @@ const onReset = () => {
     <div style="display: flex; flex-direction: column; row-gap: 1em">
       <div
         v-for="result in results"
-        :key="result.item.name"
+        :key="result.item.key"
         style="display: flex; column-gap: 1em; flex-wrap: wrap"
       >
         <label>{{ result.item.name }}</label>

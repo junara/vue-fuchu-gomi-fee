@@ -15,7 +15,7 @@ const emits = defineEmits<{
 const gomiFees = ref<GomiFee[]>([])
 const { open, onChange } = useFileDialog({
   accept: '.csv',
-  multiple: false
+  multiple: false,
 })
 onChange((files) => {
   if (!files) return
@@ -27,11 +27,11 @@ onChange((files) => {
         return {
           name: row['品目'],
           furigana: row['ふりがな'],
-          fee: row['料金']
+          fee: row['料金'],
         }
       })
       emits('change', gomiFees.value)
-    }
+    },
   })
 })
 </script>

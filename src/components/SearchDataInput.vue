@@ -14,10 +14,10 @@ const emits = defineEmits<{
 
 const gomiFees = ref<GomiFee[]>([])
 const inputValue = ref<string>(
-  '品目,料金,ふりがな\n' + '布,200,ぬの\n' + '机,800,つくえ\n' + '鉄,不可,てつ'
+  '品目,料金,ふりがな\n' + '布,200,ぬの\n' + '机,800,つくえ\n' + '鉄,不可,てつ',
 )
 const { textarea: textareaRef } = useTextareaAutosize({
-  input: inputValue
+  input: inputValue,
 })
 const onSubmit = () => {
   Papa.parse(inputValue.value, {
@@ -27,11 +27,11 @@ const onSubmit = () => {
         return {
           name: row['品目'],
           furigana: row['ふりがな'],
-          fee: row['料金']
+          fee: row['料金'],
         }
       })
       emits('change', gomiFees.value)
-    }
+    },
   })
 }
 </script>

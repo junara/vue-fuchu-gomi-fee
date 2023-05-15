@@ -4,6 +4,9 @@ import SearchResultSearch from '@/components/SearchResultSearch.vue'
 import SearchDataImport from '@/components/SearchDataImport.vue'
 import type { GomiFee } from '@/types/GomiFee'
 import SearchDataInput from '@/components/SearchDataInput.vue'
+import csvUrl from '@/data/fuchu-gomi.csv'
+import Papa from 'papaparse'
+
 const gomiFees = ref<GomiFee[]>([])
 
 const onChangeImport = (value: GomiFee[]) => {
@@ -13,6 +16,21 @@ const onChangeImport = (value: GomiFee[]) => {
 const onReset = () => {
   gomiFees.value = []
 }
+
+Papa.parse(csvUrl, {
+  download: true,
+  header: true,
+  complete: (results) => {
+    gomiFees.value = results.data.map((row: any) => {
+      return {
+        key: row['key'],
+        name: row['品目'],
+        furigana: row['ふりがな'],
+        fee: row['料金'],
+      }
+    })
+  },
+})
 </script>
 
 <template>
