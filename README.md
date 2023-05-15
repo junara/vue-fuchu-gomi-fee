@@ -1,25 +1,10 @@
 # vue-fuchu-gomi-fee
 
-This template should help get you started developing with Vue 3 in Vite.
+ゴミシール料金の検索です。
 
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
@@ -44,3 +29,24 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## 使い方
+### データ読み込み
+* 「品目,料金,ふりがな」というヘッダー行をもつcsvファイルを作成する
+
+サンプルデータとして、[東京都府中市の粗大ゴミ料金表](https://www.city.fuchu.tokyo.jp/kurashi/gomirisaikuru/dashikata/sodaigomi/sodaigomidasikata.html)を変換したcsvを
+[src/data/fuchu-gomi.csv](https://github.com/junara/vue-fuchu-gomi-fee/blob/main/src/data/fuchu-gomi.csv)に用意しています。
+
+こちらは、 東京都府中市が上記で提供しているデータを改変して使用しています。
+
+* テキストエリアに書き込む or CSVファイルを選択ボタンで読み込む
+
+```csv
+品目,料金,ふりがな
+布,200,ぬの
+机,800,つくえ
+鉄,不可,てつ
+```
+
+### 検索
+データ読み込み後検索ボックスが現れます。検索テキストと品目もしくはふりがながマッチした検索結果が画面に絞り込まれます。
