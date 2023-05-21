@@ -16,6 +16,7 @@ const { results } = useFuse(searchText, props.gomiFees, {
   fuseOptions: {
     keys: ['name', 'furigana'],
   },
+  resultLimit: 10,
   matchAllWhenSearchEmpty: false,
 });
 
