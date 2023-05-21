@@ -10,12 +10,15 @@ const { importFromUrl } = useGomiFeeCsv();
 
 const gomiFees = ref<GomiFee[]>([]);
 
+const isShowSearchResult = ref(true);
 const onChangeImport = (value: GomiFee[]) => {
   gomiFees.value = value;
+  isShowSearchResult.value = true;
 };
 
 const onReset = () => {
   gomiFees.value = [];
+  isShowSearchResult.value = false;
 };
 
 importFromUrl(csvUrl, (_gomiFees: GomiFee[]) => {
@@ -24,7 +27,7 @@ importFromUrl(csvUrl, (_gomiFees: GomiFee[]) => {
 </script>
 
 <template>
-  <div v-if="gomiFees.length === 0" style="display: flex; flex-direction: row; column-gap: 1em">
+  <div v-if="gomiFees.length === 0 && !isShowSearchResult" style="display: flex; flex-direction: row; column-gap: 1em">
     <SearchDataImport @change="onChangeImport" />
     <div>or</div>
     <SearchDataInput @change="onChangeImport" />
