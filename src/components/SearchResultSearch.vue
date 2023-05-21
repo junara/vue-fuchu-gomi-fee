@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import type { GomiFee } from '@/types/GomiFee'
-import { ref } from 'vue'
-import { useFuse } from '@vueuse/integrations/useFuse'
+import type { GomiFee } from '@/types/GomiFee';
+import { ref } from 'vue';
+import { useFuse } from '@vueuse/integrations/useFuse';
 interface Props {
-  gomiFees: GomiFee[]
+  gomiFees: GomiFee[];
 }
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
 const emits = defineEmits<{
-  (event: 'reset'): void
-}>()
+  (event: 'reset'): void;
+}>();
 
-const searchText = ref('')
+const searchText = ref('');
 const { results } = useFuse(searchText, props.gomiFees, {
   fuseOptions: {
     keys: ['name', 'furigana'],
   },
   matchAllWhenSearchEmpty: false,
-})
+});
 
 const onInputSearchText = (e: any) => {
-  searchText.value = e.target.value
-}
+  searchText.value = e.target.value;
+};
 
 const onReset = () => {
-  emits('reset')
-}
+  emits('reset');
+};
 </script>
 <template>
   <div>

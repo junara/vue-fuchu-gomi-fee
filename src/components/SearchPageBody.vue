@@ -1,36 +1,38 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import SearchResultSearch from '@/components/SearchResultSearch.vue'
-import SearchDataImport from '@/components/SearchDataImport.vue'
-import type { GomiFee } from '@/types/GomiFee'
-import SearchDataInput from '@/components/SearchDataInput.vue'
-import csvUrl from '@/data/fuchu-gomi.csv'
-import Papa from 'papaparse'
+import { ref } from 'vue';
+import SearchResultSearch from '@/components/SearchResultSearch.vue';
+import SearchDataImport from '@/components/SearchDataImport.vue';
+import type { GomiFee } from '@/types/GomiFee';
+import SearchDataInput from '@/components/SearchDataInput.vue';
+import csvUrl from '@/data/fuchu-gomi.csv';
+import Papa from 'papaparse';
+import type { ParseResult } from 'papaparse';
+import type { GomiFeeRow } from '@/types/GomiFeeRow';
 
-const gomiFees = ref<GomiFee[]>([])
+const gomiFees = ref<GomiFee[]>([]);
 
 const onChangeImport = (value: GomiFee[]) => {
-  gomiFees.value = value
-}
+  gomiFees.value = value;
+};
 
 const onReset = () => {
-  gomiFees.value = []
-}
+  gomiFees.value = [];
+};
 
 Papa.parse(csvUrl, {
   download: true,
   header: true,
-  complete: (results) => {
-    gomiFees.value = results.data.map((row: any) => {
+  complete: (results: ParseResult<GomiFeeRow>) => {
+    gomiFees.value = results.data.map((row) => {
       return {
         key: row['key'],
         name: row['品目'],
         furigana: row['ふりがな'],
         fee: row['料金'],
-      }
-    })
+      };
+    });
   },
-})
+});
 </script>
 
 <template>

@@ -1,5 +1,6 @@
 export interface GomiFee {
-  name: string
-  furigana: string
-  fee: string
+  key: string;
+  name: string;
+  furigana: string;
+  fee: string;
 }
